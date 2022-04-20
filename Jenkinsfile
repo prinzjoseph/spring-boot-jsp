@@ -25,7 +25,9 @@ pipeline {
             steps {
                 sh '''
                     version=$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)
-                    java -jar -Dserver.port=8085 target/news-${version}.jar
+                    rsync -av target/news-${version}.jar root@3.111.53.6:/root/news-service/news-service.jar
+                    rsync -av deploy.sh root@3.111.53.6:/root/news-service/deploy.sh
+                    ssh root@3.111.53.6 "bash /root/news-service/deploy.sh"
                 '''
             }
         }
