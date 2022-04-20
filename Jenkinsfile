@@ -4,15 +4,11 @@ pipeline {
     tools {
         maven '3.8.5'
     }
-    
-    parameters {
-        string(name: 'SERVER_IP', defaultValue: '127.0.0.1', description: 'Provide production server IP Address.')
-    }
 
     stages {
         stage('Source') {
             steps {
-                git branch: 'develop', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/ajilraju/spring-boot-jsp.git'
+                git branch: 'develop', changelog: false, credentialsId: 'be8573c2-78ad-49a8-9119-95feb5bc8c5e', poll: false, url: 'https://github.com/prinzjoseph/spring-boot-jsp.git'
             }
         }
         stage('Test') {
