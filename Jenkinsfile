@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Source') {
             steps {
-                git branch: 'main', changelog: false, credentialsId: 'github', poll: false, url: 'https://github.com/ajilraju/spring-boot-jsp.git'
+                git branch: 'main', changelog: false, credentialsId: 'be8573c2-78ad-49a8-9119-95feb5bc8c5e', poll: false, url: 'https://github.com/prinzjoseph/spring-boot-jsp.git'
             }
         }
         stage('Test') {
@@ -25,11 +25,15 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('Copying Artifcats') {
+        stage('Deploying Artifcats') {
             steps {
                 sh '''
                     version=$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)
-                    rsync -avzP target/news-${version}.jar root@${SERVER_IP}:/opt/
+                    rsync -avzP target/news-${version}.jar root@${SERVER_IP}:/opt/news-prod.jar
+                    rsync -avzP news-prod.service root@${SERVER_IP}:/etc/systemd/system/news-prod.service
+                    ssh root@${SERVER_IP} "systemctl daemon-reload"
+                    ssh root@${SERVER_IP} "systemctl enable news-prod.service"
+                    ssh root@${SERVER_IP} "systemctl restart news-prod.service"
                 '''
             }
         }
