@@ -11,7 +11,7 @@ Description=News Java service
 [Service]
 WorkingDirectory=/root/news-service
 ExecStart=/bin/java -Xms128m -Xmx256m -jar -Dserver.port=8085 news-service.jar
-User=ubuntu
+User=root
 Type=simple
 Restart=on-failure
 RestartSec=10
