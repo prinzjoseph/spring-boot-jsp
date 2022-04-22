@@ -30,7 +30,8 @@ pipeline {
                 sh '''
                     version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
                     rsync -avzP target/news-${version}.jar root@${SERVER_IP}:/opt/news-prod.jar      
-                '''
+                    java -jar -Dserver.port=8085 root@${SERVER_IP}:/opt/news-prod.jar
+                  '''
             }
         }
     }
