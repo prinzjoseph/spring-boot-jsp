@@ -35,7 +35,7 @@ pipeline {
                 withAWS(credentials: 'j2s3', region: 'us-east-1') {
                   sh 'echo "Uploading content with AWS creds"'
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'news-${version}.jar', bucket:'blessonm', path:'artifacts/')
-                
+                }
                 
             }
         }
