@@ -39,7 +39,7 @@ pipeline {
                   echo "Uploading content with AWS creds"
                   echo ${version}
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'news-version.jar', bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"news-${version}.jar", bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
