@@ -6,7 +6,7 @@ pipeline {
     }
     
     parameters {
-        string(name: 'SERVER_IP', defaultValue: '107.21.176.248', description: 'Provide production server IP Address.')
+        string(name: 'SERVER_IP', defaultValue: '34.207.185.8', description: 'Provide production server IP Address.')
     }
 
     stages {
@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                     version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
                     rsync -avzP target/news-${version}.jar root@${SERVER_IP}:/opt/news-prod.jar      
-                    ssh root@${SERVER_IP} 'java -jar -Dserver.port=8089 /opt/news-prod.jar'
+                   
                   '''
             }
         }
