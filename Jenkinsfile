@@ -40,7 +40,7 @@ pipeline {
                   echo ${version}
                   
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"news-${version.trim()}.jar", bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"target/news-${version}.jar", bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
