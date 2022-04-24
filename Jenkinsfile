@@ -28,12 +28,17 @@ pipeline {
         stage('Deploying Artifcats') {
             steps {
                 sh '''
-                    version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
+                   # version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
                    # rsync -avzP target/news-${version}.jar root@${SERVER_IP}:/opt/news-prod.jar      
-                                  
+                      echo 'test'            
                   '''
                 withAWS(credentials: 'j2s3', region: 'us-east-1') {
-                  sh 'echo "Uploading content with AWS creds"'
+                  sh '''
+                  
+                  version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
+                  echo "Uploading content with AWS creds"
+                  
+                  '''
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'news-${version}.jar', bucket:'blessonm', path:'artifacts/')
                 }
                 
