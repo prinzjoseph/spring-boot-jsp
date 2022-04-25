@@ -5,6 +5,10 @@ pipeline {
         maven '3.8.5'
     }
     
+    environment {
+  version = "perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml"
+}
+
     parameters {
         string(name: 'SERVER_IP', defaultValue: '34.207.185.8', description: 'Provide production server IP Address.')
     }
@@ -31,10 +35,10 @@ pipeline {
                 withAWS(credentials: 'j2s3', region: 'us-east-1') {
                   sh '''
                   
-                version="$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)"
+             
                   echo ${version}
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-{version}.jar', bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-${version}.jar', bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
