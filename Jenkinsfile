@@ -38,7 +38,7 @@ pipeline {
                 version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
                   echo ${version}
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"target/news-$(version).jar", bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"target/news-'$version'.jar", bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
