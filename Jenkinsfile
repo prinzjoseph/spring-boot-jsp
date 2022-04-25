@@ -32,8 +32,7 @@ pipeline {
                   sh '''
                   
                   echo ${version}
-                  
-                  
+                                    
                   '''
                       s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-${version}.jar', bucket:'blessonm', path:'artifacts/')
                 }
