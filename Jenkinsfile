@@ -31,10 +31,10 @@ pipeline {
                 withAWS(credentials: 'j2s3', region: 'us-east-1') {
                   sh '''
                   
-                version=news-$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)
+                version="news-$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml).jar"
                   echo ${version}
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/${"version"}.jar', bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/${version}', bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
