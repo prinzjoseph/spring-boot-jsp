@@ -35,8 +35,11 @@ pipeline {
                 withAWS(credentials: 'j2s3', region: 'us-east-1') {
                   sh '''
                   
-                  version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
-                  echo "Uploading content with AWS creds"                  
+                 # version=$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')
+                
+                version=$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)
+                
+                echo "Uploading content with AWS creds"                  
                   echo ${version}
                   
                   '''
