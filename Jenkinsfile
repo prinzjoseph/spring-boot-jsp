@@ -4,12 +4,7 @@ pipeline {
     tools {
         maven '3.8.5'
     }
-    
-   environment {
-  version = '$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')'
-}
-
-
+ 
     parameters {
         string(name: 'SERVER_IP', defaultValue: '34.207.185.8', description: 'Provide production server IP Address.')
     }
