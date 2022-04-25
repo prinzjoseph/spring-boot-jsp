@@ -6,7 +6,7 @@ pipeline {
     }
     
    environment {
-  version = "$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')"
+  version = '$(grep -E "[v][0-9]\\.[0-9]\\.[0-9]" pom.xml | awk -F"[<>]" '{print $3}')'
 }
 
 
