@@ -34,7 +34,7 @@ pipeline {
                 version=$(perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml)
                   echo ${version}
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:"target/news-'${version}'.jar", bucket:'blessonm', path:'artifacts/')
+                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-${version}.jar', bucket:'blessonm', path:'artifacts/')
                 }
                 
             }
