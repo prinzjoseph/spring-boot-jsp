@@ -27,16 +27,11 @@ pipeline {
         }
         stage('Deploying Artifcats') {
             steps {
-              
-                withAWS(credentials: 'j2s3', region: 'us-east-1') {
-                  sh '''
-                  
-                  echo ${version}
-     
+              sh '''
+                  echo ${version}    
      
                   '''
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-${version}.jar', bucket:'blessonm', path:'artifacts/')
-                }
+                
                 
             }
         }
