@@ -5,6 +5,15 @@ pipeline {
         maven '3.8.5'
     }
  
+    environment {
+        version = sh(
+                    script: '''
+                            perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml
+                        ''',
+                        returnStdout: true
+                    ).trim()
+    }
+    
     parameters {
         string(name: 'SERVER_IP', defaultValue: '34.207.185.8', description: 'Provide production server IP Address.')
     }
