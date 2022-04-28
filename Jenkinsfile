@@ -42,7 +42,12 @@ pipeline {
                     
                     s3Upload(file:"target/news-${version}.jar", bucket:'blessonm', path:"artifacts/")
                     }                
-                
+           stage('Deploying Artifcats') {
+            steps {
+                sh '''
+                    ssh -o StrictHostKeyChecking=no blez@34.229.133.35 "sudo ~/java.sh ${version}"
+                '''
+            }     } 
                 
             }
         }
