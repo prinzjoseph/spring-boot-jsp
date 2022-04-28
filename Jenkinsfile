@@ -42,6 +42,8 @@ pipeline {
                     
                     s3Upload(file:"target/news-${version}.jar", bucket:'blessonm', path:"artifacts/")
                     }                
+
+                
                 
             }
         }
