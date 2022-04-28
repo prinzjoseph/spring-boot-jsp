@@ -30,8 +30,7 @@ pipeline {
               sh '''
                   echo ${version}    
      
-                  '''
-                
+                  '''               
                 
             }
         }
