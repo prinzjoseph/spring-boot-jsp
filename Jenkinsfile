@@ -44,20 +44,11 @@ pipeline{
             sh '''
 
                version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
-<<<<<<< HEAD
-               echo $version
 
                rsync -avzP target/news-${version}.jar   blez@54.235.232.63:/opt
 
 
-=======
-               echo $version 
-<<<<<<< HEAD
-pwd
->>>>>>> 8557d37ed13242666ca398e8b6d265a608e0066e
-=======
 
->>>>>>> 5997665102f2118b8ae8347a2e727870f91037fc
             '''
  
          }
