@@ -41,8 +41,10 @@ pipeline{
 
          steps {
            
-s3CopyArtifact buildSelector: lastSuccessful(stable: true), excludeFilter: '', filter: '', flatten: false, optional: false, projectName: 'spring-test1', target: 'news-blez/new/'
-         }
+
+s3Upload acl: 'PublicReadWrite', bucket: 'news-blez', cacheControl: '', excludePathPattern: '', file: 'target/news-${version}.jar', includePathPattern: '', metadatas: [''], path: 'new', redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
+
+           }
        }
 
 
