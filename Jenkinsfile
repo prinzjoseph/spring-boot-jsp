@@ -45,7 +45,7 @@ pipeline{
 
                version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
                echo $version 
-
+pwd
             '''
  
          }
