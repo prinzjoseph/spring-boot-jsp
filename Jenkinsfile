@@ -42,7 +42,7 @@ pipeline{
          steps {
            
 
-s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: '*.jar', flatten: false, optional: false, projectName: 'spring-test1', target: 'news-blez/new/'
+s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: 'target/*.jar', flatten: false, optional: false, projectName: 'spring-test1', target: 'news-blez/new/'
            }
        }
 
