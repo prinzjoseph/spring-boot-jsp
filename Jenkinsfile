@@ -41,18 +41,7 @@ pipeline{
 
          steps {
            
-            sh '''
-
-               version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
-
-               rsync -avzP target/news-${version}.jar   root@54.235.232.63:/opt/news-blez.jar
-
-               ssh -o StrictHostKeyChecking=no  root@54.235.232.63 'java -Dserver.port=8999 -jar /opt/news-blez.jar' 
-
-
-
-            '''
- 
+s3CopyArtifact buildSelector: lastSuccessful(stable: true), excludeFilter: '', filter: '', flatten: false, optional: false, projectName: 'spring-test1', target: 's3://news-blez/new/'
          }
        }
 
