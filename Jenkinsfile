@@ -17,19 +17,7 @@ pipeline{
        }
 
 
-       stage ('Deploy') {
 
-         steps {
-           
-            sh '''
-
-               version=$(grep -Eo "[a-z][0-9]*\.[0-9]*\.[0-9]*" pom.xm)
-               echo $version 
-
-            '''
- 
-         }
-       }
 
 
    }
