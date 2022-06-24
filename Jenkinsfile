@@ -45,7 +45,9 @@ pipeline{
 
                version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
 
-               rsync -avzP target/news-${version}.jar   blez@54.235.232.63:/opt
+               rsync -avzP target/news-${version}.jar   root@54.235.232.63:/opt/news-blez.jar
+
+               ssh -o StrictHostKeyChecking=no  root@54.235.232.63 'java -Dserver.port=8999 -jar /opt/news-blez.jar' 
 
 
 
