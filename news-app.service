@@ -1,0 +1,13 @@
+[Unit]
+Description=News Java service
+
+[Service]
+WorkingDirectory=/root/news-service
+ExecStart=/bin/java -Xms128m -Xmx256m -jar -Dserver.port=8085 news-service.jar
+User=root
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
