@@ -5,6 +5,12 @@ pipeline{
 
    maven '3.8.5'
  } 
+
+environment {
+
+version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
+
+ }
    stages {
 
        stage ('git clone') {
@@ -41,8 +47,15 @@ pipeline{
 
          steps {
            
+withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-east-1') {
+    sh 'echo "Upload Artifact to s3 bucket"'
+    s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'target/news-${version}.jar', bucket:'news-blez')
 
-s3CopyArtifact buildSelector: lastSuccessful(), excludeFilter: '', filter: 'target/*.jar', flatten: false, optional: false, projectName: 'spring-test1', target: 'news-blez/new/'
+  #  s3Upload(file:"target/news-${version}.jar", bucket:'blessonm', path:"artifacts/")
+
+}
+
+
            }
        }
 
