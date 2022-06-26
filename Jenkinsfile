@@ -7,7 +7,7 @@ pipeline{
  } 
 
 environment {
-        versio = sh(
+        version = sh(
                     script: '''
                  grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml
                         ''',
