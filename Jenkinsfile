@@ -54,7 +54,7 @@ environment {
          steps {
            
 
-withAWS(profile:'default') {
+withAWS(credentials: 'j2s3', region: 'us-east-1') {
 
     sh ''' 
     echo "Upload Artifact to s3 bucket"
@@ -72,4 +72,3 @@ withAWS(profile:'default') {
    }
 
 }
-
