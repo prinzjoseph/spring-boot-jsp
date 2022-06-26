@@ -8,7 +8,7 @@ pipeline{
 
 environment {
 
-version=$(grep -Eo "[a-z][0-9]*\.[0-9]*\.[0-9]*" pom.xml)
+version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
 
  }
    stages {
