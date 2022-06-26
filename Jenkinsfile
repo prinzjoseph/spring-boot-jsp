@@ -7,8 +7,14 @@ pipeline{
  } 
 
 environment {
+        version = sh(
+                    script: '''
+                            grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml
+                        ''',
+                        returnStdout: true
+                    ).trim()
 
-version=$(grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml)
+
 
  }
    stages {
