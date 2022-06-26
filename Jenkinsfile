@@ -9,7 +9,7 @@ pipeline{
 environment {
         version = sh(
                     script: '''
-                            grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml
+                 perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml
                         ''',
                         returnStdout: true
                     ).trim()
