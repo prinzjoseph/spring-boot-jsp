@@ -9,7 +9,7 @@ pipeline{
 environment {
         version = sh(
                     script: '''
-                 perl -nle 'print "$1" if /<version>(v\\d+\\.\\d+\\.\\d+)<\\/version>/' pom.xml
+                 grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml
                         ''',
                         returnStdout: true
                     ).trim()
@@ -59,7 +59,7 @@ withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-eas
     echo $version 
     '''
 
-     s3Upload(file:'target/news-${version}.jar', bucket:'news-blez')
+     s3Upload(file:'target/news-$%7Bversion%7D.jar', bucket:'news-blez')
 
 }
 
