@@ -59,8 +59,8 @@ withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-eas
     echo $version 
     '''
 
-     s3Upload(file:'target/news-${versio}.jar', bucket:'news-blez')
-
+ 
+     s3Upload acl: 'Private', bucket: 'news-blez', cacheControl: '', excludePathPattern: '', file: 'target/news-${version}.jar', includePathPattern: '', metadatas: [''], path: 'new/', redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
 }
 
 
