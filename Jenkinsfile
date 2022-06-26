@@ -7,7 +7,7 @@ pipeline{
  } 
 
 environment {
-        version = sh(
+        versio = sh(
                     script: '''
                  grep -Eo "[a-z][0-9]*\\.[0-9]*\\.[0-9]*" pom.xml
                         ''',
@@ -59,7 +59,7 @@ withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-eas
     echo $version 
     '''
 
-     s3Upload(file:'target/news-*.jar', bucket:'news-blez')
+     s3Upload(file:'target/news-*${versio}.jar', bucket:'news-blez')
 
 }
 
