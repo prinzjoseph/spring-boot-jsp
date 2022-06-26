@@ -53,7 +53,10 @@ environment {
 
          steps {
            
-withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-east-1') {
+#withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-east-1') {
+
+withAWS(profile:'default') {
+
     sh ''' 
     echo "Upload Artifact to s3 bucket"
     echo $version 
