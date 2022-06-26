@@ -60,7 +60,7 @@ withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-eas
     '''
 
  
-     s3Upload acl: 'Private', bucket: 'news-blez', cacheControl: '', excludePathPattern: '', file: 'target/news-${version}.jar', includePathPattern: '', metadatas: [''], path: 'new/', redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
+     s3Upload acl: 'PublicReadWrite', bucket: 'news-blez', cacheControl: '', excludePathPattern: '', file: 'target/news-${version}.jar', includePathPattern: '', metadatas: [''], path: 'new/', redirectLocation: '', sseAlgorithm: '', tags: '', text: '', workingDir: ''
 }
 
 
