@@ -53,7 +53,6 @@ environment {
 
          steps {
            
-#withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-east-1') {
 
 withAWS(profile:'default') {
 
