@@ -60,7 +60,7 @@ withAWS(credentials: 'j2s3', endpointUrl: 's3://news-blez/new/', region: 'us-eas
     '''
 
  
-     s3Upload file:'target/news-${version}.jar', bucket:'news-blez'
+     s3Upload file:"target/news-$(version).jar", bucket:'news-blez'
 }
 
 
