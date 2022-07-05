@@ -1,44 +1,71 @@
-pipeline{
-
-	agent any
-
-	environment {
-		DOCKERHUB_CREDENTIALS=credentials('Dockerhub')
-	}
-
-	stages {
-        stage('Source') {
-            steps {
+pipeline { 
+2
+    environment { 
+3
+        registry = "blesson03/jenkinz" 
+4
+        registryCredential = 'Dockerhub' 
+5
+        dockerImage = '' 
+6
+    }
+7
+    agent any 
+8
+    stages { 
+9
+        stage('Cloning our Git') { 
+10
+            steps { 
+11
                 git branch: 'docker1', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
+12
             }
+13
+        } 
+14
+        stage('Building our image') { 
+15
+            steps { 
+16
+                script { 
+17
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+18
+                }
+19
+            } 
+20
         }
-
-		stage('Build') {
-
-			steps {
-				 sh 'docker build -t blesson03/jenkinz:${BUILD_NUMBER} .'
-			}
-		}
-
-		stage('Login') {
-
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
-		}
-
-		stage('Push') {
-
-			steps {
-				sh 'docker push blesson03/jenkinz:${BUILD_NUMBER}'
-			}
-		}
-	}
-
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
-
+21
+        stage('Deploy our image') { 
+22
+            steps { 
+23
+                script { 
+24
+                    docker.withRegistry( '', registryCredential ) { 
+25
+                        dockerImage.push() 
+26
+                    }
+27
+                } 
+28
+            }
+29
+        } 
+30
+        stage('Cleaning up') { 
+31
+            steps { 
+32
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+33
+            }
+34
+        } 
+35
+    }
+36
 }
