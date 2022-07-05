@@ -17,7 +17,7 @@ pipeline {
         stage('Cloning our Git') { 
 
             steps { 
-                git branch: 'docker1', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
+             git branch: 'docker1', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
             
 
             }
