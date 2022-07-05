@@ -7,6 +7,11 @@ pipeline{
 	}
 
 	stages {
+        stage('Source') {
+            steps {
+                git branch: 'main', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
+            }
+        }
 
 		stage('Build') {
 
