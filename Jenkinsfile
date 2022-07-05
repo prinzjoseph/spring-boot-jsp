@@ -1,21 +1,39 @@
-pipeline {
-    agent none
-    stages {
-        stage('Back-end') {
-            agent {
-                docker { image 'maven:3.8.1-adoptopenjdk-11' }
-            }
-            steps {
-                sh 'mvn --version'
-            }
-        }
-        stage('Front-end') {
-            agent {
-                docker { image 'node:16.13.1-alpine' }
-            }
-            steps {
-                sh 'node --version'
-            }
-         }
-    }
+pipeline{
+
+	agent any
+
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('Dockerhub')
+	}
+
+	stages {
+
+		stage('Build') {
+
+			steps {
+				sh 'docker build -t blesson03/jenkinz:${BUILD_NUMBER} .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push blesson03/jenkinz:${BUILD_NUMBER}'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
