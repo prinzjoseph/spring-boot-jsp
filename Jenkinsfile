@@ -9,14 +9,14 @@ pipeline{
 	stages {
         stage('Source') {
             steps {
-                git branch: 'main', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
+                git branch: 'docker1', changelog: false, credentialsId: 'Blesson01', poll: false, url: 'https://github.com/Blesson01/spring-boot-jsp.git'
             }
         }
 
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t blesson03/jenkinz:${BUILD_NUMBER} .'
+				 sh 'docker build -t blesson03/jenkinz:${BUILD_NUMBER} .'
 			}
 		}
 
