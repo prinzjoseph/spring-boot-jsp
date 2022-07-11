@@ -32,4 +32,4 @@ RUN mvn package
 
 EXPOSE 8898
 
-CMD java -Xms128m -Xmx256m -jar -Dserver.port=8898 target/news-*.jar
+CMD java -jar -Dserver.port=8898 target/news-*.jar
