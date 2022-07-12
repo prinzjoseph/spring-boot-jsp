@@ -45,7 +45,7 @@ pipeline {
 
                     docker.withRegistry( '', registryCredential ) { 
 
-                        dockerImage.push() 
+                         dockerImage.push() 
 
                     }
 
@@ -59,11 +59,26 @@ pipeline {
 
             steps { 
 
-                 sh "docker rmi $registry:$BUILD_NUMBER" 
+                  sh "docker rmi $registry:$BUILD_NUMBER" 
+
+            }
+
+        }
+        stage('deploy on K8') { 
+
+            steps { 
+
+                  sh '''
+                  cat deployment.yaml | sed 's/BUILD_NUMBER/$BUILD_NUMBER/g' > newdeployment.yml
+                 rsync -avzP *.yml root@3.86.33.70:/root/check/
+                 ssh root@3.86.33.70 "cd /root/check/ &&  kubectl apply -f newdeployment.yml " 
+                 ssh root@3.86.33.70 "cd /root/check/ &&  kubectl apply -f service.yaml "
+                  ''' 
 
             }
 
         } 
+ 
 
     }
 
