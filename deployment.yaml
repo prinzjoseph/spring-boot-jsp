@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dep-myapp5
+  name: java-blez 
 spec:
   replicas: 3
   selector:
