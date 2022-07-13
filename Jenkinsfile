@@ -72,8 +72,8 @@ pipeline {
                   echo $BUILD_NUMBER 
                   cat deployment.yaml | sed "s/BUILD_NUMBER/$BUILD_NUMBER/g" > newdeployment.yml
                  rsync -avzP *.yml root@3.85.103.173:/root/check/
-                 ssh root@3.85.103.173 "cd /root/check/ &&  kubectl apply -f newdeployment.yml " 
-                 ssh root@3.85.103.173 "cd /root/check/ &&  kubectl apply -f service.yml "
+                 ssh  -o StrictHostKeyChecking=no root@3.85.103.173 "cd /root/check/ &&  kubectl apply -f newdeployment.yml " 
+                 ssh  -o StrictHostKeyChecking=no root@3.85.103.173 "cd /root/check/ &&  kubectl apply -f service.yml "
                   ''' 
 
             }
